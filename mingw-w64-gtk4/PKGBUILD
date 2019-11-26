@@ -24,7 +24,7 @@ depends=("${MINGW_PACKAGE_PREFIX}-gcc-libs"
          "${MINGW_PACKAGE_PREFIX}-json-glib"
          "${MINGW_PACKAGE_PREFIX}-libepoxy"
          "${MINGW_PACKAGE_PREFIX}-pango"
-         "${MINGW_PACKAGE_PREFIX}-gst-plugins-bad"
+         "${MINGW_PACKAGE_PREFIX}-gstreamer"
          "${MINGW_PACKAGE_PREFIX}-shared-mime-info")
 options=('!strip' '!debug')
 source=("https://gitlab.gnome.org/GNOME/gtk/-/archive/${pkgver}/gtk-${pkgver}.tar.gz"
@@ -49,6 +49,8 @@ build() {
     -Dbuild-tests=false \
     -Dman-pages=true \
     -Dvulkan=no \
+    -Dintrospection=false \
+    -Ddocumentation=false \
     ../gtk-${pkgver}
 
   ninja
