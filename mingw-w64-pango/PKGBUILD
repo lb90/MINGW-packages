@@ -33,9 +33,17 @@ sha256sums=('1b636aabf905130d806372136f5e137b6a27f26d47defd9240bf444f6a4fe610')
 prepare() {
   cd "${srcdir}/${_realname}-${pkgver}"
 
+
 }
 
 build() {
+  echo "Before: $MSYS"
+  unset MSYS
+  echo "After: $MSYS"
+  #echo "MSYS environment variable: $MSYS"
+
+  python -c "import ctypes; print(ctypes.windll.kernel32.GetErrorMode())"
+
   cd "${srcdir}"
   [[ -d build-${MSYSTEM} ]] && rm -rf build-${MSYSTEM}
   mkdir -p build-${MSYSTEM}
