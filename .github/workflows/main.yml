@@ -15,10 +15,10 @@ jobs:
       fail-fast: false
       matrix:
         include: [
-          { msystem: UCRT64, runner: windows-2022},
-          { msystem: CLANG64, runner: windows-2022},
-          { msystem: MINGW64, runner: windows-2022},
-          { msystem: MINGW32, runner: windows-2022},
+          #{ msystem: UCRT64, runner: windows-2022},
+          #{ msystem: CLANG64, runner: windows-2022},
+          #{ msystem: MINGW64, runner: windows-2022},
+          #{ msystem: MINGW32, runner: windows-2022},
           { msystem: CLANGARM64, runner: windows-11-arm}
         ]
     name: ${{ matrix.msystem }}
@@ -100,7 +100,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.msystem }}-packages
-          path: ${{ steps.facts.outputs.drive }}/_/artifacts/*.pkg.tar.*
+          path: ${{ steps.facts.outputs.drive }}/_/artifacts/
           if-no-files-found: ignore
 
       - name: "Upload dumps"

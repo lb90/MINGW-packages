@@ -140,6 +140,7 @@ for package in "${packages[@]}"; do
     cd - > /dev/null
     repo-add $PWD/artifacts/ci.db.tar.gz $PWD/B/*.pkg.tar.*
     pacman -Sy
+    cp -r $PWD/B/src $PWD/artifacts
     cp $PWD/B/*.pkg.tar.* $PWD/artifacts
     echo "::endgroup::"
 
