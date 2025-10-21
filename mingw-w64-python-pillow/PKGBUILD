@@ -4,7 +4,7 @@ _realname=pillow
 pkgbase=mingw-w64-python-pillow
 pkgname=("${MINGW_PACKAGE_PREFIX}-python-pillow")
 pkgver=12.0.0
-pkgrel=1
+pkgrel=2
 pkgdesc="Python Imaging Library (PIL) fork Python3 version (mingw-w64)"
 arch=('any')
 mingw_arch=('mingw64' 'ucrt64' 'clang64' 'clangarm64')
@@ -33,6 +33,7 @@ makedepends=("${MINGW_PACKAGE_PREFIX}-python-build"
 optdepends=("${MINGW_PACKAGE_PREFIX}-tk: for the ImageTK module")
 source=("https://pypi.org/packages/source/${_realname::1}/${_realname}/${_realname}-${pkgver}.tar.gz")
 sha256sums=('87d4f8125c9988bfbed67af47dd7a953e2fc7b0cc1e7800ec6d2080d490bb353')
+options=('debug' '!strip')
 
 prepare() {
   rm -rf "python-build-${MSYSTEM}" | true
@@ -44,7 +45,7 @@ build() {
 
   # setuptools doesn't handle the archiver correctly in LLVM environments
   AR="ar" \
-  ${MINGW_PREFIX}/bin/python -m build --wheel --skip-dependency-check --no-isolation
+  ${MINGW_PREFIX}/bin/python -m build -C debug=true --wheel --skip-dependency-check --no-isolation
 }
 
 check() {
